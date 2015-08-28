@@ -8,8 +8,9 @@ import com.davrodrila.rover.beans.*;
 public class RoverMovementState implements iApplicationState {
 
     @Override
-    public void executeCommand(String[] argsFromInput, Rover rover, Plateau plateau) {
+    public iApplicationState executeCommand(String[] argsFromInput, Rover rover, Plateau plateau) {
 
+        return new RoverInitializationState();
     }
 
     @Override

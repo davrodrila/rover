@@ -16,15 +16,15 @@ public class RoverInitializationState implements iApplicationState {
     private static int THIRD_ARGUMENT = 2;
 
     @Override
-    public void executeCommand(String[] argsFromInput, Rover rover, Plateau plateau) {
+    public iApplicationState executeCommand(String[] argsFromInput, Rover rover, Plateau plateau) {
         if (plateau.getWidth()>=Integer.parseInt(argsFromInput[FIRST_ARGUMENT]) && plateau.getHeight()>=Integer.parseInt(argsFromInput[SECOND_ARGUMENT])) {
             rover.setX(Integer.parseInt(argsFromInput[FIRST_ARGUMENT]));
             rover.setY(Integer.parseInt(argsFromInput[SECOND_ARGUMENT]));
             rover.setOrientation(argsFromInput[THIRD_ARGUMENT]);
-
         } else {
             throw new InvalidPositionException(INVALID_POSITION_ROVER_CREATION);
         }
+        return new RoverMovementState();
     }
 
     @Override

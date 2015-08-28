@@ -7,7 +7,7 @@ import com.davrodrila.rover.beans.*;
  */
 public interface iApplicationState {
 
-    public void executeCommand(String[] argsFromInput,Rover rover, Plateau plateau);
+    public iApplicationState executeCommand(String[] argsFromInput, Rover rover, Plateau plateau);
 
     public boolean checkCommand(String command);
 }

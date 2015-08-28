@@ -15,9 +15,10 @@ public class PlateauInitState implements iApplicationState {
     private static int SECOND_ARGUMENT = 1;
 
     @Override
-    public void executeCommand(String[] argsFromInput,Rover rover, Plateau plateau) {
+    public iApplicationState executeCommand(String[] argsFromInput, Rover rover, Plateau plateau) {
         plateau.setWidth(Integer.parseInt(argsFromInput[FIRST_ARGUMENT]));
         plateau.setHeight(Integer.parseInt(argsFromInput[SECOND_ARGUMENT]));
+        return new RoverInitializationState();
     }
 
     @Override

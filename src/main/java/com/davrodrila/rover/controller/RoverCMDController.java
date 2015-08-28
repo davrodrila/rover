@@ -13,7 +13,6 @@ public class RoverCMDController {
     private Plateau plateau;
     private Rover rover;
 
-    private static String ERROR_MALFORMED_COMMAND = "The command provided is not correct.";
     private static String SEPARATOR_CHARACTER = " ";
     private static String DEFAULT_ROVER_ORIENTATION = "N";
 
@@ -29,18 +28,10 @@ public class RoverCMDController {
 
     public void sendCommand(String command) throws MalformedCommandException,InvalidPositionException {
         if (state.checkCommand(command)) {
-            state.executeCommand(command.split(SEPARATOR_CHARACTER),rover,plateau);
-            nextStep();
+            state = state.executeCommand(command.split(SEPARATOR_CHARACTER),rover,plateau);
+
         }
 
-    }
-
-
-    private void nextStep() {
-        if (state instanceof RoverInitializationState)
-            state = new RoverMovementState();
-        else
-            state = new RoverInitializationState();
     }
 
     public int getWidth() {
