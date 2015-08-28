@@ -78,7 +78,7 @@ public class TestRoverCMDController {
     public void roverWasSuccessfullyCreated() {
         controller.sendCommand("5 5");
         controller.sendCommand("1 2 N");
-        assertTrue(controller.getRover().getX()==1 && controller.getRover().getY()==2 && controller.getRover().getOrientation().equals("N"));
+        assertTrue(controller.getRover().getCoordinates().getX()==1 && controller.getRover().getCoordinates().getY()==2 && controller.getRover().getOrientation().equals("N"));
 
     }
 

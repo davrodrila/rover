@@ -7,30 +7,20 @@ import com.davrodrila.rover.beans.orientation.*;
  */
 public class Rover {
 
-    private int x;
-    private int y;
+    private Coordinates coordinates;
     private iOrientationState orientation;
 
-    public Rover(int x, int y, String orientation) {
-        this.x = x;
-        this.y = y;
+    public Rover(Coordinates coordinates, String orientation) {
+        this.coordinates = coordinates;
         this.orientation = setOrientationStateFromString(orientation);
     }
 
-    public int getX() {
-        return x;
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
     }
 
     public String getOrientation() {
@@ -63,4 +53,8 @@ public class Rover {
         orientation = orientation.turnRight();
     }
 
+    public Coordinates simulateMovement() {
+
+        return this.getCoordinates().aggregateCoordinates(orientation.getMovementVector());
+    }
 }

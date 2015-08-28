@@ -19,7 +19,7 @@ public class RoverCMDController {
     public RoverCMDController() {
         state = new PlateauInitState();
         plateau = new Plateau(0,0);
-        rover = new Rover(0,0,DEFAULT_ROVER_ORIENTATION);
+        rover = new Rover(new Coordinates(0,0),DEFAULT_ROVER_ORIENTATION);
     }
 
     public iApplicationState getState() {
@@ -29,9 +29,7 @@ public class RoverCMDController {
     public void sendCommand(String command) throws MalformedCommandException,InvalidPositionException {
         if (state.checkCommand(command)) {
             state = state.executeCommand(command.split(SEPARATOR_CHARACTER),rover,plateau);
-
         }
-
     }
 
     public int getWidth() {

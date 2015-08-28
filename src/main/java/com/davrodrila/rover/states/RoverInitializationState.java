@@ -18,8 +18,8 @@ public class RoverInitializationState implements iApplicationState {
     @Override
     public iApplicationState executeCommand(String[] argsFromInput, Rover rover, Plateau plateau) {
         if (plateau.getWidth()>=Integer.parseInt(argsFromInput[FIRST_ARGUMENT]) && plateau.getHeight()>=Integer.parseInt(argsFromInput[SECOND_ARGUMENT])) {
-            rover.setX(Integer.parseInt(argsFromInput[FIRST_ARGUMENT]));
-            rover.setY(Integer.parseInt(argsFromInput[SECOND_ARGUMENT]));
+            Coordinates coordinates = new Coordinates(Integer.parseInt(argsFromInput[FIRST_ARGUMENT]),Integer.parseInt(argsFromInput[SECOND_ARGUMENT]));
+            rover.setCoordinates(coordinates);
             rover.setOrientation(argsFromInput[THIRD_ARGUMENT]);
         } else {
             throw new InvalidPositionException(INVALID_POSITION_ROVER_CREATION);
