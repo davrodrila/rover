@@ -1,7 +1,6 @@
 package com.davrodrila.rover.test;
 
-import com.davrodrila.rover.beans.orientation.NorthState;
-import com.davrodrila.rover.controller.*;
+import com.davrodrila.rover.controller.RoverCMDController;
 import com.davrodrila.rover.exceptions.*;
 import com.davrodrila.rover.states.*;
 import org.junit.*;
@@ -79,7 +78,7 @@ public class TestRoverCMDController {
     public void roverWasSuccessfullyCreated() {
         controller.sendCommand("5 5");
         controller.sendCommand("1 2 N");
-        assertTrue(controller.getRover().getX()==1 && controller.getRover().getY()==2 && controller.getRover().getOrientation() instanceof NorthState);
+        assertTrue(controller.getRover().getX()==1 && controller.getRover().getY()==2 && controller.getRover().getOrientation().equals("N"));
 
     }
 

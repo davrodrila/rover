@@ -14,4 +14,9 @@ public class EastState implements iOrientationState {
     public iOrientationState turnRight() {
         return new SouthState();
     }
+
+    @Override
+    public String getCardinalLetter() {
+        return "E";
+    }
 }

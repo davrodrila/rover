@@ -8,4 +8,6 @@ public interface iOrientationState {
     public iOrientationState turnLeft();
 
     public iOrientationState turnRight();
+
+    public String getCardinalLetter();
 }

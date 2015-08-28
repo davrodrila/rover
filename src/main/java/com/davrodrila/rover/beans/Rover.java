@@ -33,8 +33,8 @@ public class Rover {
         this.y = y;
     }
 
-    public iOrientationState getOrientation() {
-        return orientation;
+    public String getOrientation() {
+        return orientation.getCardinalLetter();
     }
 
     public void setOrientation(String state) {
