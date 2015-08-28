@@ -1,7 +1,7 @@
 package com.davrodrila.rover.test;
 
 import com.davrodrila.rover.controller.*;
-import com.davrodrila.rover.exceptions.MalformedCommandException;
+import com.davrodrila.rover.exceptions.*;
 import org.junit.*;
 
 import static org.junit.Assert.assertTrue;
@@ -25,7 +25,7 @@ public class TestRoverCMDController {
     }
 
     @Test
-    public void firstCommandSentCorrectly() {
+    public void firstCommandSentProperlyFormed() {
         int maxSize = 5;
         controller.sendCommand(maxSize + " " + maxSize);
         assertTrue(controller.getWidth() == maxSize);
@@ -46,5 +46,43 @@ public class TestRoverCMDController {
     @Test(expected=MalformedCommandException.class)
     public void firstCommandSentWithNegativeNumbers() {
         controller.sendCommand("-5 -5");
+    }
+
+    @Test
+    public void stateSouldBePointingToRoverCreationAfterPlateauSetUp() {
+        controller.sendCommand("5 5");
+        assertTrue(controller.getState()== States.RoverDefinition);
+    }
+
+    @Test
+    public void secondCommandSentProperlyFormed() {
+        controller.sendCommand("5 5");
+        controller.sendCommand("1 2 N");
+    }
+
+    @Test(expected=MalformedCommandException.class)
+    public void secondCommandSentMalformed() {
+        controller.sendCommand("5 5");
+        controller.sendCommand("1 2N");
+    }
+
+    @Test(expected=MalformedCommandException.class)
+    public void secondCommandSentWithIncorrectCardinalDirection() {
+        controller.sendCommand("5 5");
+        controller.sendCommand("1 2 M");
+    }
+
+    @Test
+    public void roverWasSuccessfullyCreated() {
+        controller.sendCommand("5 5");
+        controller.sendCommand("1 2 N");
+        assertTrue(controller.getRover().getX()==1 && controller.getRover().getY()==2 && controller.getRover().getOrientation().equals("N"));
+
+    }
+
+    @Test(expected = InvalidPositionException.class)
+    public void roverCreatedInInvalidPosition() {
+        controller.sendCommand("5 5");
+        controller.sendCommand("6 5 N");
     }
 }

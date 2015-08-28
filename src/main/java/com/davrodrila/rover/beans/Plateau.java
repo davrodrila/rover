@@ -1,4 +1,4 @@
-package com.davrodrila.rover;
+package com.davrodrila.rover.beans;
 /**
  * Created by David on 28/08/2015.
  */
