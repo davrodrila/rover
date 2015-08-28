@@ -57,4 +57,8 @@ public class Rover {
 
         return this.getCoordinates().aggregateCoordinates(orientation.getMovementVector());
     }
+
+    public void move() {
+        this.coordinates = this.coordinates.aggregateCoordinates(orientation.getMovementVector());
+    }
 }

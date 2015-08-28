@@ -1,6 +1,7 @@
 package com.davrodrila.rover.test;
 
-import com.davrodrila.rover.controller.RoverCMDController;
+import com.davrodrila.rover.beans.Coordinates;
+import com.davrodrila.rover.controller.RoverController;
 import com.davrodrila.rover.exceptions.*;
 import com.davrodrila.rover.states.*;
 import org.junit.*;
@@ -13,12 +14,12 @@ import static org.junit.Assert.assertTrue;
 public class TestRoverCMDController {
 
     //TODO: The controller should be pulled into an interface and this should use a Mock object.
-    private RoverCMDController controller;
+    private RoverController controller;
 
 
     @Before
     public void initiateController() {
-        controller = new RoverCMDController();
+        controller = new RoverController();
     }
 
     @Test
@@ -103,5 +104,35 @@ public class TestRoverCMDController {
         }catch (InvalidPositionException e) {
             assertTrue(controller.getState() instanceof RoverInitializationState);
         }
+    }
+
+    @Test
+    public void properMovementCommandSent(){
+        controller.sendCommand("5 5");
+        controller.sendCommand("1 2 N");
+        controller.sendCommand("MMRM");
+    }
+
+    @Test(expected = MalformedCommandException.class)
+    public void wrongMovementCommandSent() {
+        controller.sendCommand("5 5");
+        controller.sendCommand("1 2 N");
+        controller.sendCommand("MMUM");
+    }
+
+    @Test
+    public void checkIfEndCoordinatesAreCorrect() {
+        Coordinates expectedCoordinates = new Coordinates(1,4);
+        controller.sendCommand("5 5");
+        controller.sendCommand("1 1 N");
+        controller.sendCommand("MRMMLMMLMM");
+        assertTrue(controller.getRover().getCoordinates().equals(expectedCoordinates));
+    }
+
+    @Test(expected = InvalidPositionException.class)
+    public void shouldThrowExceptionsIfMovementGoesThroughWrongCoordinates() {
+        controller.sendCommand("5 5");
+        controller.sendCommand("1 1 N");
+        controller.sendCommand("MMMMLMM");
     }
 }

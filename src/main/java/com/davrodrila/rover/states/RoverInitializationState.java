@@ -30,7 +30,7 @@ public class RoverInitializationState implements iApplicationState {
     @Override
     public boolean checkCommand(String command) {
         if (!command.matches(REGEX_ROVER_INIT_SYNTAX)) {
-            throw new MalformedCommandException();
+            throw new MalformedCommandException(MALFORMED_ROVER_INIT_INSTRUCTIONS);
         } else {
             return true;
         }

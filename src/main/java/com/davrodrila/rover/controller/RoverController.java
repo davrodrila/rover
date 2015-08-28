@@ -7,7 +7,7 @@ import com.davrodrila.rover.states.*;
 /**
  * Created by David on 28/08/2015.
  */
-public class RoverCMDController {
+public class RoverController {
 
     private iApplicationState state;
     private Plateau plateau;
@@ -16,7 +16,7 @@ public class RoverCMDController {
     private static String SEPARATOR_CHARACTER = " ";
     private static String DEFAULT_ROVER_ORIENTATION = "N";
 
-    public RoverCMDController() {
+    public RoverController() {
         state = new PlateauInitState();
         plateau = new Plateau(0,0);
         rover = new Rover(new Coordinates(0,0),DEFAULT_ROVER_ORIENTATION);
