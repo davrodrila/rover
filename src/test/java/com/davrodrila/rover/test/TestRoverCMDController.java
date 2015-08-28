@@ -2,6 +2,7 @@ package com.davrodrila.rover.test;
 
 import com.davrodrila.rover.controller.*;
 import com.davrodrila.rover.exceptions.*;
+import com.davrodrila.rover.states.*;
 import org.junit.*;
 
 import static org.junit.Assert.assertTrue;
@@ -11,6 +12,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class TestRoverCMDController {
 
+    //TODO: The controller should be pulled into an interface and this should use a Mock object.
     private RoverCMDController controller;
 
 
@@ -21,7 +23,7 @@ public class TestRoverCMDController {
 
     @Test
     public void initialStateShouldBePlateauInitilization() {
-        assertTrue(controller.getState() == States.PlateauInit);
+        assertTrue(controller.getState() instanceof PlateauInitState);
     }
 
     @Test
@@ -51,7 +53,7 @@ public class TestRoverCMDController {
     @Test
     public void stateSouldBePointingToRoverCreationAfterPlateauSetUp() {
         controller.sendCommand("5 5");
-        assertTrue(controller.getState()== States.RoverDefinition);
+        assertTrue(controller.getState() instanceof RoverInitializationState);
     }
 
     @Test
@@ -84,5 +86,22 @@ public class TestRoverCMDController {
     public void roverCreatedInInvalidPosition() {
         controller.sendCommand("5 5");
         controller.sendCommand("6 5 N");
+    }
+
+    @Test
+    public void stateGoesToRoverMovementAfterRoverDefinition() {
+        controller.sendCommand("5 5");
+        controller.sendCommand("1 2 N");
+        assertTrue(controller.getState() instanceof RoverMovementState);
+    }
+
+    @Test
+    public void stateShouldNotAdvanceWhenIncorrectPositionIsGiven() {
+        controller.sendCommand("5 5");
+        try {
+            controller.sendCommand("6 5 N");
+        }catch (InvalidPositionException e) {
+            assertTrue(controller.getState() instanceof RoverInitializationState);
+        }
     }
 }

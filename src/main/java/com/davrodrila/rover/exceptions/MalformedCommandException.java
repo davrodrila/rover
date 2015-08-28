@@ -10,10 +10,11 @@ package com.davrodrila.rover.exceptions;
  *
  */
 public class MalformedCommandException extends RuntimeException {
+    private static String ERROR_MALFORMED_COMMAND = "The command provided is not correct. ";
 
     public MalformedCommandException(){}
 
     public MalformedCommandException(String message) {
-        super(message);
+        super(ERROR_MALFORMED_COMMAND + message);
     }
 }
