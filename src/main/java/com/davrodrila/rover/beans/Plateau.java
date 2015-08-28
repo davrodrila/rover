@@ -26,4 +26,12 @@ public class Plateau {
     public void setHeight(int height) {
         this.height = height;
     }
+
+    public boolean areThisCoordinatesValid(Coordinates coordinates) {
+        if (coordinates.getX()<=width && coordinates.getY()<=height && coordinates.getX() >= 0 && coordinates.getY()>=0 ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
