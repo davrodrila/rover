@@ -28,6 +28,7 @@ public class RoverController {
     }
 
     public void sendCommand(String command) throws MalformedCommandException,InvalidPositionException {
+        command = command.toUpperCase();
         if (state.checkCommand(command)) {
             state = state.executeCommand(command.split(SEPARATOR_CHARACTER),rover,plateau);
         }
