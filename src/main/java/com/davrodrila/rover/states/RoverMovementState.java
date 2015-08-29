@@ -37,7 +37,7 @@ public class RoverMovementState implements iApplicationState {
 
     @Override
     public boolean checkCommand(String command) {
-        if (!command.matches(REGEX_ROVER_MOVEMENT)) {
+        if (!command.toUpperCase().matches(REGEX_ROVER_MOVEMENT)) {
             throw new MalformedCommandException(MALFORMED_MOVEMENT_INSTRUCTIONS);
         } else {
             return true;

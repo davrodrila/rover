@@ -33,13 +33,13 @@ public class Rover {
 
     private iOrientationState setOrientationStateFromString(String state) {
         iOrientationState stateToReturn = null;
-        if (state.equals("N")) {
+        if (state.equalsIgnoreCase("N")) {
             stateToReturn = new NorthState();
-        } else if (state.equals("W")) {
+        } else if (state.equalsIgnoreCase("W")) {
             stateToReturn = new WestState();
-        } else if (state.equals("S")) {
+        } else if (state.equalsIgnoreCase("S")) {
             stateToReturn = new SouthState();
-        } else if (state.equals("E")) {
+        } else if (state.equalsIgnoreCase("E")) {
             stateToReturn = new EastState();
         }
         return stateToReturn;

@@ -1,4 +1,4 @@
-package com.davrodrila.rover.test;
+package com.davrodrila.rover.test.beans;
 
 import com.davrodrila.rover.beans.*;
 import org.junit.*;

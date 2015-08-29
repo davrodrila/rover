@@ -34,22 +34,6 @@ public class RoverController {
         }
     }
 
-    public int getWidth() {
-        return plateau.getWidth();
-    }
-
-    public int getHeight() {
-        return plateau.getHeight();
-    }
-
-    public Rover getRover() {
-        return rover;
-    }
-
-    public void setRover(Rover rover) {
-        this.rover = rover;
-    }
-
     public void showMessage() {
         System.out.println(state.getPrompt());
     }
