@@ -11,6 +11,8 @@ public class RoverInitializationState implements iApplicationState {
     private static String REGEX_ROVER_INIT_SYNTAX = "\\d\\s\\d\\s[NSWE]";
     private static String MALFORMED_ROVER_INIT_INSTRUCTIONS = " You should provide two positive numbers followed by a cardinal direction (N,S,W,E). Eg: 1 2 N";
     private static String INVALID_POSITION_ROVER_CREATION = " Can't create rover on provided positions, the plateau is too small.";
+    private static String PROMPT = "Insert the coordinates where the rover should start and a cardinal orientation (N,S,W,E). Eg: 1 2 N";
+
     private static int FIRST_ARGUMENT = 0;
     private static int SECOND_ARGUMENT = 1;
     private static int THIRD_ARGUMENT = 2;
@@ -29,10 +31,16 @@ public class RoverInitializationState implements iApplicationState {
 
     @Override
     public boolean checkCommand(String command) {
+        command = command.toUpperCase();
         if (!command.matches(REGEX_ROVER_INIT_SYNTAX)) {
             throw new MalformedCommandException(MALFORMED_ROVER_INIT_INSTRUCTIONS);
         } else {
             return true;
         }
+    }
+
+    @Override
+    public String getPrompt() {
+        return PROMPT;
     }
 }

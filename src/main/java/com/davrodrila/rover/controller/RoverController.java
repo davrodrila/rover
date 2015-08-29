@@ -22,6 +22,7 @@ public class RoverController {
         rover = new Rover(new Coordinates(0,0),DEFAULT_ROVER_ORIENTATION);
     }
 
+
     public iApplicationState getState() {
         return state;
     }
@@ -46,5 +47,9 @@ public class RoverController {
 
     public void setRover(Rover rover) {
         this.rover = rover;
+    }
+
+    public void showMessage() {
+        System.out.println(state.getPrompt());
     }
 }

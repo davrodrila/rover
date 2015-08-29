@@ -10,7 +10,7 @@ public class PlateauInitState implements iApplicationState {
 
     private static String REGEX_PLATEAU_INIT_SYNTAX = "\\d\\s\\d";
     private static String MALFORMED_PLATEAU_INIT_INSTRUCTIONS = " You should provide two positive numbers separated with a space. Eg: 5 5";
-
+    private static String PROMPT = "Insert the size of the plateau by indicating two positive numbers separated by withespace. Eg: 5 5";
     private static int FIRST_ARGUMENT = 0;
     private static int SECOND_ARGUMENT = 1;
 
@@ -28,5 +28,10 @@ public class PlateauInitState implements iApplicationState {
         } else {
             return true;
         }
+    }
+
+    @Override
+    public String getPrompt() {
+        return PROMPT;
     }
 }

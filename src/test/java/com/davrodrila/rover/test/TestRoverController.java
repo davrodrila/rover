@@ -11,9 +11,8 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by David on 28/08/2015.
  */
-public class TestRoverCMDController {
+public class TestRoverController {
 
-    //TODO: The controller should be pulled into an interface and this should use a Mock object.
     private RoverController controller;
 
 
@@ -76,6 +75,12 @@ public class TestRoverCMDController {
     }
 
     @Test
+    public void secondCommandWithLowercaseCardinalDirectionShouldStillWork() {
+        controller.sendCommand("5 5");
+        controller.sendCommand("1 2 n");
+    }
+
+    @Test
     public void roverWasSuccessfullyCreated() {
         controller.sendCommand("5 5");
         controller.sendCommand("1 2 N");
@@ -121,6 +126,20 @@ public class TestRoverCMDController {
     }
 
     @Test
+    public void commandShouldWorkWithLowercaseLetters() {
+        controller.sendCommand("5 5");
+        controller.sendCommand("1 2 N");
+        controller.sendCommand("mrm");
+    }
+
+    @Test
+    public void commandShouldWorkMixingLowerAndUppercaseLetters() {
+        controller.sendCommand("5 5");
+        controller.sendCommand("1 2 N");
+        controller.sendCommand("MrM");
+    }
+
+    @Test
     public void checkIfEndCoordinatesAreCorrect() {
         Coordinates expectedCoordinates = new Coordinates(1,4);
         controller.sendCommand("5 5");
@@ -134,5 +153,25 @@ public class TestRoverCMDController {
         controller.sendCommand("5 5");
         controller.sendCommand("1 1 N");
         controller.sendCommand("MMMMLMM");
+    }
+
+    @Test
+    public void testIfFirstCaseGivenWorks() {
+        Coordinates expectedCoordinates = new Coordinates(1,3);
+        String expecetedOrientation = "N";
+        controller.sendCommand("5 5");
+        controller.sendCommand("1 2 N");
+        controller.sendCommand("LMLMLMLMM");
+        assertTrue(controller.getRover().getCoordinates().equals(expectedCoordinates) && controller.getRover().getOrientation().equals(expecetedOrientation));
+    }
+
+    @Test
+    public void testIfSecondCaseGivenWorks() {
+        Coordinates expectedCoordinates = new Coordinates(5,1);
+        String expecetedOrientation = "E";
+        controller.sendCommand("5 5");
+        controller.sendCommand("3 3 E");
+        controller.sendCommand("MMRMMRMRRM");
+        assertTrue(controller.getRover().getCoordinates().equals(expectedCoordinates) && controller.getRover().getOrientation().equals(expecetedOrientation));
     }
 }

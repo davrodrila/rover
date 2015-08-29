@@ -9,10 +9,12 @@ import com.davrodrila.rover.exceptions.*;
 public class RoverMovementState implements iApplicationState {
 
     public static String REGEX_ROVER_MOVEMENT = "[LRM]+";
-    public static String MALFORMED_MOVEMENT_INSTRUCTIONS = "You have to use either L or R to indicate the rover where tu turn, and M to advance. Do not use spaces to separate orders.";
-    public static String INVALID_POSITION_ROVER_MOVEMENT = "Your route ends up in some invalid coordinates on the plateau at some point.";
+    public static String MALFORMED_MOVEMENT_INSTRUCTIONS = "You have to use either L or R to indicate the rover where to turn, and M to advance. Do not use spaces to separate orders. Eg: LLMMRM";
+    public static String INVALID_POSITION_ROVER_MOVEMENT = "Your route goes out of the plateau at some point.";
+    public static String PROMPT = "Insert the movement of the Rover as a sequence. L turns Left, R turns Right, M moves towards the facing direction. Eg: LMMLM";
 
     private static int FIRST_ARGUMENT = 0;
+
     @Override
     public iApplicationState executeCommand(String[] argsFromInput, Rover rover, Plateau plateau) {
         String command = argsFromInput[FIRST_ARGUMENT];
@@ -28,15 +30,23 @@ public class RoverMovementState implements iApplicationState {
                     throw new InvalidPositionException(INVALID_POSITION_ROVER_MOVEMENT);
             }
         }
+        String output = rover.getCoordinates().getX() + " " + rover.getCoordinates().getY() + " " +rover.getOrientation();
+        System.out.println(output);
         return new RoverInitializationState();
     }
 
     @Override
     public boolean checkCommand(String command) {
-        if (command.matches(REGEX_ROVER_MOVEMENT)) {
-            return true;
-        } else {
+        command = command.toUpperCase();
+        if (!command.matches(REGEX_ROVER_MOVEMENT)) {
             throw new MalformedCommandException(MALFORMED_MOVEMENT_INSTRUCTIONS);
+        } else {
+            return true;
         }
+    }
+
+    @Override
+    public String getPrompt() {
+        return PROMPT;
     }
 }

@@ -10,4 +10,6 @@ public interface iApplicationState {
     public iApplicationState executeCommand(String[] argsFromInput, Rover rover, Plateau plateau);
 
     public boolean checkCommand(String command);
+
+    public String getPrompt();
 }
