@@ -13,16 +13,16 @@ public class RoverInitializationState implements iApplicationState {
     private static String INVALID_POSITION_ROVER_CREATION = " Can't create rover on provided positions, the plateau is too small.";
     private static String PROMPT = "Insert the coordinates where the rover should start and a cardinal orientation (N,S,W,E). Eg: 1 2 N";
 
-    private static int FIRST_ARGUMENT = 0;
-    private static int SECOND_ARGUMENT = 1;
-    private static int THIRD_ARGUMENT = 2;
+    private static int X_COORDINATE_ARGUMENT = 0;
+    private static int Y_COORDINATE_ARGUMENT = 1;
+    private static int ROVER_ORIENTATION_ARGUMENT = 2;
 
     @Override
     public iApplicationState executeCommand(String[] argsFromInput, Rover rover, Plateau plateau) {
-        Coordinates inputCoordinates = new Coordinates(Integer.parseInt(argsFromInput[FIRST_ARGUMENT]),Integer.parseInt(argsFromInput[SECOND_ARGUMENT]));
+        Coordinates inputCoordinates = new Coordinates(Integer.parseInt(argsFromInput[X_COORDINATE_ARGUMENT]),Integer.parseInt(argsFromInput[Y_COORDINATE_ARGUMENT]));
         if (plateau.areThisCoordinatesValid(inputCoordinates)) {
             rover.setCoordinates(inputCoordinates);
-            rover.setOrientation(argsFromInput[THIRD_ARGUMENT]);
+            rover.setOrientation(argsFromInput[ROVER_ORIENTATION_ARGUMENT]);
         } else {
             throw new InvalidPositionException(INVALID_POSITION_ROVER_CREATION);
         }

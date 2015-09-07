@@ -13,11 +13,11 @@ public class RoverMovementState implements iApplicationState {
     public static String INVALID_POSITION_ROVER_MOVEMENT = "Your route goes out of the plateau at some point.";
     public static String PROMPT = "Insert the movement of the Rover as a sequence. L turns Left, R turns Right, M moves towards the facing direction. Eg: LMMLM";
 
-    private static int FIRST_ARGUMENT = 0;
+    private static int COMMAND_MOVEMENT_ARGUMENT = 0;
 
     @Override
     public iApplicationState executeCommand(String[] argsFromInput, Rover rover, Plateau plateau) {
-        String command = argsFromInput[FIRST_ARGUMENT];
+        String command = argsFromInput[COMMAND_MOVEMENT_ARGUMENT];
         for (int i=0;i<command.length();i++) {
             if (command.charAt(i)=='L') {
                 rover.turnLeft();
